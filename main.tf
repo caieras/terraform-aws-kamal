@@ -12,6 +12,7 @@ resource "aws_subnet" "public_subnet" {
   vpc_id     = aws_vpc.main.id
   cidr_block = var.public_subnet_cidr
   availability_zone = "${var.region}a"
+  map_public_ip_on_launch = true
 
   tags = {
     Name = var.public_subnet_name
@@ -23,6 +24,7 @@ resource "aws_subnet" "private_subnet" {
   vpc_id = aws_vpc.main_vpc.id
   cidr_block = var.private_subnet_cidr
   availability_zone = "${var.region}a"
+  map_public_ip_on_launch = false
 
   tags = {
     Name = var.private_subnet_name
@@ -124,7 +126,7 @@ resource "aws_instance" "app_instance" {
     Name = var.ec2_name
   }
 
-    # user_data = data.cloudinit_config.cloud_config_web.rendered
+  # user_data = data.cloudinit_config.cloud_config_web.rendered
 }
 
 # EC2 instance in Public Subnet
@@ -139,4 +141,6 @@ resource "aws_instance" "accessories_instance" {
   tags = {
     Name = "${var.ec2_name}2"
   }
+
+  # user_data = data.cloudinit_config.cloud_config_web.rendered
 }
