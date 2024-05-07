@@ -1,0 +1,8 @@
+ec2_name = "ApplicationEC2"
+ec2_ami = "ami-0cdc2f24b2f67ea17"
+ec2_instance_type = "t2.micro"
+igw_name = "ApplicationIGW"
+subnet_name = "ApplicationSubnet"
+subnet_cidr = "10.0.1.0/24"
+vpc_name = "ApplicationVPC"
+vpc_cidr = "10.0.0.0/16"

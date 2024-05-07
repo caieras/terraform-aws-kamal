@@ -15,5 +15,5 @@ terraform {
 # Terraform will use the specified profile to authenticate with AWS.
 provider "aws" {
   profile = "default"
-  region  = "us-west-2"
+  region  = "sa-east-1"
 }
