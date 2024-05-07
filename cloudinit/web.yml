@@ -1,5 +1,5 @@
 hostname: web
-fqdn: web.insirius
+fqdn: web.application
 
 write_files:
   - path: /letsencrypt/acme.json
