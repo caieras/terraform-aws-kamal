@@ -64,3 +64,19 @@ variable "vpc_cidr" {
   type = string
   default = "10.0.0.0/16"
 }
+
+variable "key_name" {
+  description = "Name of the SSH key pair"
+  type = string
+}
+
+variable "public_key_path" {
+  description = "Path to the public key file"
+  type = string
+}
+
+variable "route_table_name" {
+  description = "Route Table name"
+  type = string
+  default = "rt"
+}
