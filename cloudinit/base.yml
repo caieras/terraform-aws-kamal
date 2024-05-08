@@ -16,8 +16,7 @@ users:
   - name: kamal
     groups:
       - sudo
-    sudo:
-      - ALL=(ALL) NOPASSWD:ALL
+    sudo: ALL=(ALL) NOPASSWD:ALL
     shell: /bin/bash
     ssh_import_id:
       - gh:caieras
@@ -26,9 +25,10 @@ users:
 write_files:
   - path: /etc/cloud/templates/hosts.debian.tmpl
     content: |
-      10.0.0.2 web
-      10.0.0.3 accessories
+      10.0.1.10 web
+      10.0.1.11 accessories
     append: true
+
   - path: /etc/netplan/01-netplan.yaml
     content: |
       network:

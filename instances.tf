@@ -1,3 +1,29 @@
+resource "aws_instance" "web" {
+  ami                         = var.ec2_ami
+  instance_type               = var.ec2_instance_type
+  subnet_id                   = aws_subnet.public.id
+  vpc_security_group_ids      = [aws_security_group.web.id]
+  associate_public_ip_address = true
+  private_ip                  = "10.0.1.10"
+  tags = {
+    Name = "web-instance"
+  }
+  user_data = data.cloudinit_config.cloud_config_web.rendered
+}
+
+resource "aws_instance" "accessories" {
+  ami                         = var.ec2_ami
+  instance_type               = var.ec2_instance_type
+  subnet_id                   = aws_subnet.public.id
+  vpc_security_group_ids      = [aws_security_group.web.id]
+  associate_public_ip_address = true
+  private_ip                  = "10.0.1.11"
+  tags = {
+    Name = "accessories-instance"
+  }
+  user_data = data.cloudinit_config.cloud_config_accessories.rendered
+}
+
 resource "aws_db_instance" "rds_instance" {
   engine                 = "postgres"
   engine_version         = "16.1"
@@ -6,8 +32,7 @@ resource "aws_db_instance" "rds_instance" {
   storage_type           = "gp2"
   db_name                = "psql"
   username               = "postgres"
-  password               = "mypassword"
-  multi_az               = false
+  password               = var.db_password
   publicly_accessible    = false
   port                   = 5432
   vpc_security_group_ids = [aws_security_group.rds.id]
@@ -23,28 +48,4 @@ resource "aws_db_instance" "rds_instance" {
   tags = {
     Name = "rds-instance"
   }
-}
-
-resource "aws_instance" "web" {
-  ami                         = var.ec2_ami
-  instance_type               = var.ec2_instance_type
-  subnet_id                   = aws_subnet.public.id
-  vpc_security_group_ids      = [aws_security_group.public.id]
-  associate_public_ip_address = true
-  tags = {
-    Name = "web-instance"
-  }
-  user_data = data.cloudinit_config.cloud_config_web.rendered
-}
-
-resource "aws_instance" "accessories" {
-  ami                         = var.ec2_ami
-  instance_type               = var.ec2_instance_type
-  subnet_id                   = aws_subnet.private.id
-  vpc_security_group_ids      = [aws_security_group.private.id]
-  associate_public_ip_address = false
-  tags = {
-    Name = "accessories-instance"
-  }
-  user_data = data.cloudinit_config.cloud_config_web.rendered
 }

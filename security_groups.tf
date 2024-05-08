@@ -1,4 +1,4 @@
-resource "aws_security_group" "public" {
+resource "aws_security_group" "web" {
   name_prefix = "web-sg"
   vpc_id      = aws_vpc.main.id
 
@@ -31,7 +31,7 @@ resource "aws_security_group" "public" {
   }
 }
 
-resource "aws_security_group" "private" {
+resource "aws_security_group" "accessories" {
   name_prefix = "accessories-sg"
   vpc_id      = aws_vpc.main.id
 
@@ -39,7 +39,7 @@ resource "aws_security_group" "private" {
     from_port       = 0
     to_port         = 0
     protocol        = "-1"
-    security_groups = [aws_security_group.public.id]
+    security_groups = [aws_security_group.web.id]
   }
 
   egress {
@@ -58,7 +58,7 @@ resource "aws_security_group" "rds" {
     from_port       = 5432
     to_port         = 5432
     protocol        = "tcp"
-    security_groups = [aws_security_group.public.id, aws_security_group.private.id]
+    security_groups = [aws_security_group.web.id, aws_security_group.accessories.id]
   }
 
   egress {

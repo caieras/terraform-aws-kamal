@@ -4,22 +4,39 @@ output "vpc_id" {
   value = aws_vpc.main.id
 }
 
-output "public_subnet_id" {
-  value = aws_subnet.public.id
-}
-
-output "private_subnet_id" {
-  value = aws_subnet.private.id
-}
-
 ## Instance Output
 
-output "app_instance_id" {
+output "web_instance_id" {
   description = "ID of the Application EC2 instance."
   value = aws_instance.web.id
 }
 
-output "app_instance_public_ip" {
+output "web_instance_public_ip" {
   description = "Public IP address of the Application EC2 instance."
   value = aws_instance.web.public_ip
+}
+
+output "accessories_instance_id" {
+  description = "ID of the Application EC2 instance."
+  value = aws_instance.accessories.id
+}
+
+output "accessories_instance_public_ip" {
+  description = "Public IP address of the Application EC2 instance."
+  value = aws_instance.accessories.public_ip
+}
+
+output "db_name" {
+  description = "The name of the database created in the RDS instance."
+  value       = aws_db_instance.rds_instance.db_name
+}
+
+output "db_endpoint" {
+  description = "The endpoint of the RDS instance."
+  value       = aws_db_instance.rds_instance.endpoint
+}
+
+output "db_username" {
+  description = "The master username for the RDS instance."
+  value       = aws_db_instance.rds_instance.username
 }
