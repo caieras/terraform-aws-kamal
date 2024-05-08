@@ -20,7 +20,7 @@ variable "ec2_instance_type" {
 variable "region" {
   description = "Value of the Region of resource"
   type = string
-  default = "us-east-1"
+  default = "sa-east-1"
 }
 
 variable "igw_name" {
@@ -65,15 +65,15 @@ variable "vpc_cidr" {
   default = "10.0.0.0/16"
 }
 
-# variable "key_name" {
-#   description = "Name of the SSH key pair"
-#   type = string
-# }
+variable "availability_zone1" {
+  type = string
+  default = "sa-east-1a"
+}
 
-# variable "public_key_path" {
-#   description = "Path to the public key file"
-#   type = string
-# }
+variable "availability_zone2" {
+  type = string
+  default = "sa-east-1c"
+}
 
 variable "route_table_name" {
   description = "Route Table name"
